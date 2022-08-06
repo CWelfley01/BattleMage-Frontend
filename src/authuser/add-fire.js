@@ -20,7 +20,7 @@ export default function addFireElement() {
   const postFireElement = (event) => {
     axios
       .post(
-        "http://localhost:5000/add-FireElement",
+        "https://caw-capstone.herokuapp.com/add-FireElement",
         {
           blank: blank,
           water: water,

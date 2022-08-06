@@ -9,7 +9,7 @@ export default class GetElements extends Component {
   }
   listElements = () => {
     axios
-      .get("http://127.0.0.1:5000/Element")
+      .get("https://caw-capstone.herokuapp.com/Element")
       .then((response) => console.log(response.data[0]))
       .catch((error) => console.error(error))
     };

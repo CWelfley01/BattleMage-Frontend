@@ -20,7 +20,7 @@ export default function addAirElement() {
 
   const postAirElement = (event) => {
     axios
-      .post("http://localhost:5000/add-AirElement", {
+      .post("https://caw-capstone.herokuapp.com/add-AirElement", {
         blank: blank,
         fire: fire,
         water: water,

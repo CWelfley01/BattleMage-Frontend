@@ -19,7 +19,7 @@ export default function addEarthElement() {
   const postEarthElement = (event) => {
     axios
       .post(
-        "http://localhost:5000/add-EarthElement",
+        "https://caw-capstone.herokuapp.com/add-EarthElement",
         {
           blank: blank,
           fire: fire,

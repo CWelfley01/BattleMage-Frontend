@@ -19,7 +19,7 @@ export default function addWaterElement() {
   const postWaterElement = (event) => {
     axios
       .post(
-        "http://127.0.0.1:5000/add-WaterElement",
+        "https://caw-capstone.herokuapp.com/add-WaterElement",
         {
           blank: blank,
           fire: fire,
