@@ -8,18 +8,14 @@ import GetElements from "../components/get-elements";
 import styles from "../style/lists.scss";
 
 export default function addElement() {
-  const [Main, setMain] = useState("");
-  const [Fire, setFire] = useState("");
-  const [Water, setWater] = useState("");
-  const [Air, setAir] = useState("");
-  const [Earth, setEarth] = useState("");
+  const [Combo, setCombo] = useState("");
+  const [Result, setResult] = useState("");
+  
 
   const clearState = () => {
-    setMain("");
-    setFire("");
-    setWater("");
-    setAir("");
-    setEarth("");
+    setCombo("");
+    setResult("");
+    
   };
 
   const postElement = (event) => {
@@ -27,11 +23,9 @@ export default function addElement() {
       .post(
         "https://caw-capstone.herokuapp.com/add-element",
         {
-          Main: Main,
-          Fire: Fire,
-          Water: Water,
-          Air: Air,
-          Earth: Earth,
+          Combo: Combo,
+          Result: Result,
+          
         },
         {
           Headers: { "Access-Control-Allow-Origin": "*" },
@@ -53,40 +47,20 @@ export default function addElement() {
           <h1 className="add-spell-title">Enter an elements data!</h1>
           <form className="add-spell-form" onSubmit={postElement}>
             <input
-              value={Main}
+              value={Combo}
               className="add-spell-form-input"
-              onChange={(event) => setMain(event.target.value)}
+              onChange={(event) => setCombo(event.target.value)}
               type="text"
-              placeholder="Main"
+              placeholder="Combo"
             />
             <input
-              value={Fire}
+              value={Result}
               className="add-spell-form-input"
-              onChange={(event) => setFire(event.target.value)}
+              onChange={(event) => setResult(event.target.value)}
               type="text"
-              placeholder="Fire"
+              placeholder="Result"
             />
-            <input
-              value={Water}
-              className="add-spell-form-input"
-              onChange={(event) => setWater(event.target.value)}
-              type="text"
-              placeholder="Water"
-            />
-            <input
-              value={Air}
-              className="add-spell-form-input"
-              onChange={(event) => setAir(event.target.value)}
-              type="text"
-              placeholder="Air"
-            />
-            <input
-              value={Earth}
-              className="add-spell-form-input"
-              onChange={(event) => setEarth(event.target.value)}
-              type="text"
-              placeholder="Earth"
-            />
+            
             <button className="add-spell-form-button">Add element!</button>
           </form>
         </div>
