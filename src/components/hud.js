@@ -21,7 +21,6 @@ export default class Hud extends Component {
     this.state = {
       element1: "blank",
       element2: "blank",
-      elementsToCombine: "blank",
       combinedElement: "blank",
       form: "blank",
       spell: "blank",
@@ -87,16 +86,19 @@ export default class Hud extends Component {
     
     if (element2 !== "blank") {
       axios.get(`http://127.0.0.1:5000/Element`).then((response) => {
-        console.log(
+        this.setState({combinedElement:
           response.data.filter((item) => 
             item.Combo.includes(`${this.state.element1}/${this.state.element2}`)
-          ).map(filteredItem => filteredItem.Result)
+          ).map(filteredItem => filteredItem.Result)}
+          
           
         );
         
       });
     }
   };
+
+  
 
   componentDidUpdate() {
     this.combineElements();
