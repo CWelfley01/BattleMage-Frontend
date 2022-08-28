@@ -83,25 +83,22 @@ export default class Hud extends Component {
   combineElements = () => {
     const element1 = this.state.element1;
     const element2 = this.state.element2;
-    
-    if (element2 !== "blank") {
       axios.get(`http://127.0.0.1:5000/Element`).then((response) => {
-        this.setState({combinedElement:
-          response.data.filter((item) => 
-            item.Combo.includes(`${this.state.element1}/${this.state.element2}`)
-          ).map(filteredItem => filteredItem.Result)}
-          
-          
-        );
-        
+        this.setState({
+          combinedElement: response.data
+            .filter((item) =>
+              item.Combo.includes(
+                `${this.state.element1}/${this.state.element2}`
+              )
+            )
+            .map((filteredItem) => filteredItem.Result),
+        });
       });
-    }
+    
   };
 
-  
-
-  componentDidUpdate() {
-    this.combineElements();
+  componentDidUpdate(prevProps, prevState) {
+    if ( prevState.element2 !== this.state.element2) {this.combineElements()}
   }
 
   clearSpellForm = () => {
@@ -127,7 +124,7 @@ export default class Hud extends Component {
           <div className="foreground">
             <div className="left-side">
               <div className="live">{this.state.element1}</div>
-              <div className="dead">{this.state.combinedElement}</div>
+              <div className="live">{this.state.combinedElement}</div>
             </div>
             <div className="right-side">
               <div className="live">{this.state.element2}</div>
