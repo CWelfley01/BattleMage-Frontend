@@ -21,6 +21,7 @@ export default class Hud extends Component {
     this.state = {
       element1: "blank",
       element2: "blank",
+      elementsToCombine: "blank",
       combinedElement: "blank",
       form: "blank",
       spell: "blank",
@@ -42,7 +43,7 @@ export default class Hud extends Component {
     } else {
       this.setState({ element2: "fire" });
     }
-  }
+  };
 
   setWaterMana = () => {
     if (this.state.element1 == "blank") {
@@ -70,7 +71,6 @@ export default class Hud extends Component {
 
   setShotForm = () => {
     this.setState({ form: "Shot" });
-
   };
 
   setBeamForm = () => {
@@ -82,12 +82,19 @@ export default class Hud extends Component {
   };
 
   combineElements = () => {
-    if (this.state.element2 !== "blank") {
-      axios
-        .get(
-          `http://127.0.0.1:5000/Element/${this.state.element1}/${this.state.element2}`
-        )
-        .then((response) => console.log(response));
+    const element1 = this.state.element1;
+    const element2 = this.state.element2;
+    
+    if (element2 !== "blank") {
+      axios.get(`http://127.0.0.1:5000/Element`).then((response) => {
+        console.log(
+          response.data.filter((item) => 
+            item.Combo.includes(`${this.state.element1}/${this.state.element2}`)
+          ).map(filteredItem => filteredItem.Result)
+          
+        );
+        
+      });
     }
   };
 
