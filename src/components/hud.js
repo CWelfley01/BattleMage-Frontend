@@ -23,6 +23,7 @@ export default class Hud extends Component {
       element2: "blank",
       combinedElement: "blank",
       form: "blank",
+      spellcon: "blank",
       spell: "blank",
     };
 
@@ -83,22 +84,43 @@ export default class Hud extends Component {
   combineElements = () => {
     const element1 = this.state.element1;
     const element2 = this.state.element2;
-      axios.get(`http://127.0.0.1:5000/Element`).then((response) => {
-        this.setState({
-          combinedElement: response.data
-            .filter((item) =>
-              item.Combo.includes(
-                `${this.state.element1}/${this.state.element2}`
-              )
-            )
-            .map((filteredItem) => filteredItem.Result),
-        });
+    axios.get(`http://127.0.0.1:5000/Element`).then((response) => {
+      this.setState({
+        combinedElement: response.data
+          .filter((item) =>
+            item.Combo.includes(`${this.state.element1}/${this.state.element2}`)
+          )
+          .map((filteredItem) => filteredItem.Result),
       });
+    });
+  };
+
+  createSpell = () => {
+    const element1 = this.state.element1;
+    const combinedElement = this.state.combinedElement;
+    const form = this.state.form;
+    const spell = this.state.spell;
+    
+    axios.get(`http://127.0.0.1:5000/Form`).then((response) => {
+      console.log({
+        spell: response.data
+          .filter((item) =>
+            item.element.includes(
+              `${this.state.combinedElement}`
+            )
+          ).filter(spell => spell.includes(`${this.state.form}`))
+      });
+    });
     
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if ( prevState.element2 !== this.state.element2) {this.combineElements()}
+    if (prevState.element2 !== this.state.element2) {
+      this.combineElements();
+    }
+    if (prevState.form !== this.state.form) {
+      this.createSpell();
+    }
   }
 
   clearSpellForm = () => {
@@ -122,14 +144,11 @@ export default class Hud extends Component {
             {/* <img src={PoweredScroll} className="live" /> */}
           </div>
           <div className="foreground">
-            <div className="left-side">
-              <div className="live">{this.state.element1}</div>
-              <div className="live">{this.state.combinedElement}</div>
-            </div>
-            <div className="right-side">
-              <div className="live">{this.state.element2}</div>
-              <div className="dead">{this.state.form}</div>
-            </div>
+            <div className="live">{this.state.element1}</div>
+            <div className="live">{this.state.combinedElement}</div>
+            <div className="live">{this.state.element2}</div>
+            <div className="live">{this.state.form}</div>
+            <div className="live">{this.state.spell}</div>
           </div>
         </div>
         <div className="hud">

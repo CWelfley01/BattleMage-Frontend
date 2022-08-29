@@ -18,7 +18,7 @@ export default function addFormElement() {
 
   const postFormElement = (event) => {
     axios
-      .post("https://caw-capstone.herokuapp.com/add-FormElement", {
+      .post("http://127.0.0.1:5000/add-Form", {
         element: element,
         shot: shot,
         beam: beam,
