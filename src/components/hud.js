@@ -23,7 +23,6 @@ export default class Hud extends Component {
       element2: "blank",
       combinedElement: "blank",
       form: "blank",
-      spellcon: "blank",
       spell: "blank",
     };
 
@@ -35,6 +34,8 @@ export default class Hud extends Component {
     this.setBeamForm = this.setBeamForm.bind(this);
     this.setWallForm = this.setWallForm.bind(this);
     this.combineElements = this.combineElements.bind(this);
+    this.createASpell = this.createASpell.bind(this);
+    this.createBSpell = this.createBSpell.bind(this);
   }
 
   setFireMana = () => {
@@ -95,31 +96,54 @@ export default class Hud extends Component {
     });
   };
 
-  createSpell = () => {
+  createBSpell = () => {
     const element1 = this.state.element1;
     const combinedElement = this.state.combinedElement;
     const form = this.state.form;
     const spell = this.state.spell;
-    
+
     axios.get(`http://127.0.0.1:5000/Form`).then((response) => {
-      console.log({
+      this.setState({
         spell: response.data
           .filter((item) =>
-            item.element.includes(
-              `${this.state.combinedElement}`
-            )
-          ).filter(spell => spell.includes(`${this.state.form}`))
+            item.Combine.includes(`${this.state.element1}/${this.state.form}`)
+          )
+          .map((filteredItem) => filteredItem.End),
       });
     });
-    
+  };
+
+  createASpell = () => {
+    const element1 = this.state.element1;
+    const combinedElement = this.state.combinedElement;
+    const form = this.state.form;
+    const spell = this.state.spell;
+
+    axios.get(`http://127.0.0.1:5000/Form`).then((response) => {
+      this.setState({
+        spell: response.data
+          .filter((item) =>
+            item.Combine.includes(
+              `${this.state.combinedElement}/${this.state.form}`
+            )
+          )
+          .map((filteredItem) => filteredItem.End),
+      });
+    });
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.element2 !== this.state.element2) {
-      this.combineElements();
-    }
-    if (prevState.form !== this.state.form) {
-      this.createSpell();
+    if (this.state.element1 !== "blank") {
+      if (prevState.element2 !== this.state.element2) {
+        this.combineElements();
+      }
+      if (prevState.form !== this.state.form) {
+        if (this.state.combinedElement !== "blank") {
+          this.createASpell();
+        } else {
+          this.createBSpell();
+        }
+      }
     }
   }
 
@@ -131,7 +155,13 @@ export default class Hud extends Component {
       this.setState({ element2: "blank" });
     }
     {
+      this.setState({ combinedElement: "blank" });
+    }
+    {
       this.setState({ form: "blank" });
+    }
+    {
+      this.setState({ spell: "blank" });
     }
   };
 
@@ -144,10 +174,10 @@ export default class Hud extends Component {
             {/* <img src={PoweredScroll} className="live" /> */}
           </div>
           <div className="foreground">
-            <div className="live">{this.state.element1}</div>
-            <div className="live">{this.state.combinedElement}</div>
-            <div className="live">{this.state.element2}</div>
-            <div className="live">{this.state.form}</div>
+            <div className="dead">{this.state.element1}</div>
+            <div className="dead">{this.state.element2}</div>
+            <div className="dead">{this.state.combinedElement}</div>
+            <div className="dead">{this.state.form}</div>
             <div className="live">{this.state.spell}</div>
           </div>
         </div>

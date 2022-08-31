@@ -2,27 +2,24 @@ import React, { useState } from "react";
 import axios from "axios";
 
 export default function addFormElement() {
-  const [element, setElement] = useState("");
-  const [shot, setShot] = useState("");
-  const [beam, setBeam] = useState("");
-  const [wall, setWall] = useState("");
+  const [Combine, setCombine] = useState("");
+  const [End, setEnd] = useState("");
+  
   
 
   const clearState = () => {
-    setElement("");
-    setShot("");
-    setBeam("");
-    setWall("");
+    setCombine("");
+    setEnd("");
+    
     
   };
 
   const postFormElement = (event) => {
     axios
       .post("http://127.0.0.1:5000/add-Form", {
-        element: element,
-        shot: shot,
-        beam: beam,
-        wall: wall,
+        Combine: Combine,
+        End: End,
+        
         
       },{
         headers: { "Access-Control-Allow-Origin": "*" },
@@ -38,34 +35,21 @@ export default function addFormElement() {
       <h1 className="add-spell-title">Enter an elements data!</h1>
       <form className="add-spell-form" onSubmit={postFormElement}>
       <input
-          value={element}
+          value={Combine}
           className="add-spell-form-input"
-          onChange={(event) => setElement(event.target.value)}
+          onChange={(event) => setCombine(event.target.value)}
           type="text"
-          placeholder="Element"
+          placeholder="Element/Form"
         />
         <input
-          value={shot}
+          value={End}
           className="add-spell-form-input"
-          onChange={(event) => setShot(event.target.value)}
+          onChange={(event) => setEnd(event.target.value)}
           type="text"
-          placeholder="Shot"
+          placeholder="End"
         />
-        <input
-          value={beam}
-          className="add-spell-form-input"
-          onChange={(event) => setBeam(event.target.value)}
-          type="text"
-          placeholder="Beam"
-        />
-        <input
-          value={wall}
-          className="add-spell-form-input"
-          onChange={(event) => setWall(event.target.value)}
-          type="text"
-          placeholder="Wall"
-        />
-        <button className="add-spell-form-button">Add element!</button>
+        
+        <button className="add-spell-form-button">Add Form!</button>
       </form>
     </div>
   );

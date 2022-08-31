@@ -51,7 +51,7 @@ export default function addElement() {
               className="add-spell-form-input"
               onChange={(event) => setCombo(event.target.value)}
               type="text"
-              placeholder="Combo"
+              placeholder="First element/Second element"
             />
             <input
               value={Result}
