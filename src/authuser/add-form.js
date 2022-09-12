@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import styles from "../style/lists.scss";
+
 export default function addFormElement() {
   const [Combine, setCombine] = useState("");
   const [End, setEnd] = useState("");

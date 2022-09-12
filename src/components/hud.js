@@ -5,10 +5,13 @@ import axios from "axios";
 import Scroll from "../../static/assets/images/emptySpellForm.png";
 import PoweredScroll from "../../static/assets/images/poweredSpellForm.png";
 
-import fireicon from "../../static/assets/images/fireicon.png";
-import watericon from "../../static/assets/images/watericon.png";
-import airicon from "../../static/assets/images/airicon.png";
-import earthicon from "../../static/assets/images/earthicon.png";
+import Fire from "../../static/assets/images/fireicon.png";
+import Water from "../../static/assets/images/watericon.png";
+import Air from "../../static/assets/images/airicon.png";
+import Earth from "../../static/assets/images/earthicon.png";
+import Fireball from "../../static/assets/images/fireball.png";
+import Flamethrower from "../../static/assets/images/flamethrower.png";
+import RingofFire from "../../static/assets/images/ringoffire.png";
 import shot from "../../static/assets/images/shot.png";
 import beam from "../../static/assets/images/beam.png";
 import wall from "../../static/assets/images/wall.png";
@@ -178,22 +181,24 @@ export default class Hud extends Component {
             <div className="dead">{this.state.element2}</div>
             <div className="dead">{this.state.combinedElement}</div>
             <div className="dead">{this.state.form}</div>
-            <div className="live">{this.state.spell}</div>
+            <div className="live">
+              <img src={this.state.spell} />
+            </div>
           </div>
         </div>
         <div className="hud">
           <div className="mana">
             <button onClick={this.setFireMana}>
-              <img src={fireicon} />
+              <img src={Fire} />
             </button>
             <button onClick={this.setWaterMana}>
-              <img src={watericon} />
+              <img src={Water} />
             </button>
             <button onClick={this.setAirMana}>
-              <img src={airicon} />
+              <img src={Air} />
             </button>
             <button onClick={this.setEarthMana}>
-              <img src={earthicon} />
+              <img src={Earth} />
             </button>
           </div>
           <div className="form">
