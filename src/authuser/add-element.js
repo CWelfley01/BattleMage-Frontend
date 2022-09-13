@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Banner from "../../static/assets/images/fire-banner.png";
 import NavBar from "../components/NavBar";
-import GetElements from "../components/get-elements";
+
 
 import styles from "../style/lists.scss";
 

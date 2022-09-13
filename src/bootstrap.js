@@ -9,10 +9,6 @@ import App from "./components/app";
 import reducers from "./reducers";
 import AddSpell from "./authuser/add-spell";
 import AddElement from "./authuser/add-element";
-import AddFireElement from "./authuser/add-fire";
-import AddWaterElement from "./authuser/add-water";
-import AddAirElement from "./authuser/add-air";
-import AddEarthElement from "./authuser/add-earth";
 import AddFormElement from "./authuser/add-form";
 import Navbar from "./components/NavBar";
 
